@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gullygram CMO - AI Growth Marketing & Indian Festival Studio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Material+Symbols+Outlined&display=swap">
+<style>
+  :root {
+    --bg: #0b0712;
+    --surface: #140d24;
+    --surface-light: #1f1536;
+    --surface-card: #251940;
+    --border: #332354;
+    --border-accent: #543987;
+    --violet-primary: #8b5cf6;
+    --violet-bright: #a78bfa;
+    --violet-glow: rgba(139, 92, 246, 0.35);
+    --amber-primary: #f59e0b;
+    --amber-glow: rgba(245, 158, 11, 0.35);
+    --amber-light: #fbbf24;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --green-accent: #10b981;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-image: 
+      radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 90% 90%, rgba(245, 158, 11, 0.08) 0%, transparent 45%);
+    overflow: hidden;
+  }
+
+  /* --- Top Header --- */
+  header {
+    background: rgba(20, 13, 36, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--violet-primary), var(--amber-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #fff;
+    box-shadow: 0 0 16px var(--violet-glow);
+  }
+  .brand-info h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, #ffffff 40%, var(--amber-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand-info p {
+    margin: 2px 0 0 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* Navigation Bar */
+  .nav-tabs {
+    display: flex;
+    gap: 0.4rem;
+    background: rgba(11, 7, 18, 0.7);
+    padding: 0.3rem;
+    border-radius: 14px;
+    border: 1px solid var(--border-accent);
+  }
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.55rem 1.1rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-btn:hover {
+    color: var(--text-main);
+    background: rgba(139, 92, 246, 0.1);
+  }
+  .nav-btn.active {
+    background: linear-gradient(135deg, #321e56, var(--surface-card));
+    color: var(--amber-light);
+    border: 1px solid var(--amber-primary);
+    box-shadow: 0 0 14px var(--amber-glow);
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    color: var(--green-accent);
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green-accent);
+    box-shadow: 0 0 10px var(--green-accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* --- Main Container & Views --- */
+  #main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1160px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .view-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    animation: fadeIn 0.25s ease-out;
+  }
+  .view-panel.hidden { display: none !important; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* --- Chat View --- */
+  #log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  #log::-webkit-scrollbar, .custom-scroll::-webkit-scrollbar { width: 6px; }
+  #log::-webkit-scrollbar-track, .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+  #log::-webkit-scrollbar-thumb, .custom-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 82%;
+    animation: slideIn 0.25s ease-out;
+  }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .msg.user { align-self: flex-end; align-items: flex-end; }
+  .msg.agent { align-self: flex-start; align-items: flex-start; }
+
+  .sender-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+    padding: 0 0.4rem;
+  }
+
+  .bubble {
+    padding: 0.9rem 1.2rem;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .msg.user .bubble {
+    background: linear-gradient(135deg, #7c3aed, var(--violet-primary));
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 16px var(--violet-glow);
+  }
+  .msg.agent .bubble {
+    background: var(--surface);
+    color: var(--text-main);
+    border: 1px solid var(--border-accent);
+    border-left: 4px solid var(--amber-primary);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  .bubble.rich {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  /* Quick Prompt Suggestions */
+  .suggestions-container { padding: 0.6rem 1.5rem 0.2rem 1.5rem; }
+  .suggestions-title {
+    font-size: 0.75rem;
+    color: var(--amber-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .suggestions-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+  }
+  @media (max-width: 700px) { .suggestions-row { grid-template-columns: 1fr; } }
+  .prompt-chip {
+    background: var(--surface);
+    border: 1px solid var(--border-accent);
+    border-radius: 14px;
+    padding: 0.75rem 0.95rem;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+  }
+  .prompt-chip:hover {
+    background: var(--surface-light);
+    border-color: var(--amber-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--amber-glow);
+  }
+  .prompt-chip .chip-title {
+    font-weight: 700;
+    color: var(--amber-light);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .prompt-chip .chip-desc {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  form {
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.9rem 1.5rem 1.25rem 1.5rem;
+    background: var(--bg);
+  }
+  .input-wrapper { flex: 1; position: relative; display: flex; align-items: center; }
+  input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border-accent);
+    border-radius: 14px;
+    padding: 0.85rem 1.1rem;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  input:focus {
+    border-color: var(--violet-primary);
+    box-shadow: 0 0 16px var(--violet-glow);
+  }
+  button.send-btn {
+    background: linear-gradient(135deg, var(--amber-primary), var(--amber-light));
+    border: none;
+    border-radius: 14px;
+    padding: 0 1.4rem;
+    color: #000;
+    font-weight: 800;
+    font-family: inherit;
+    font-size: 0.92rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px var(--amber-glow);
+  }
+  button.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--amber-glow);
+  }
+
+  /* --- A2UI Cards --- */
+  .a2card {
+    background: var(--surface);
+    border: 1px solid var(--border-accent);
+    border-radius: 18px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  }
+  .a2col { display: flex; flex-direction: column; gap: 0.65rem; }
+  .a2row { display: flex; align-items: center; gap: 0.65rem; }
+  .a2row.between { justify-content: space-between; }
+  .a2text { color: var(--text-main); line-height: 1.6; font-size: 0.94rem; }
+  .a2-h1, .a2-h2, .a2-h3 { font-weight: 800; color: var(--amber-light); margin-bottom: 0.2rem; }
+  .a2-h1 { font-size: 1.25rem; }
+  .a2-h2 { font-size: 1.15rem; }
+  .a2-h3 { font-size: 1.05rem; }
+  .a2-caption { font-size: 0.82rem; color: var(--violet-bright); font-weight: 600; }
+  .a2divider { border: 0; border-top: 1px solid var(--border); margin: 0.5rem 0; }
+  .a2img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 14px; border: 1px solid var(--border-accent); }
+
+  /* --- View 2: Indian Festival Studio --- */
+  .festival-studio {
+    padding: 1.25rem 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .studio-banner {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
+    border: 1px solid var(--border-accent);
+    border-radius: 20px;
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .studio-banner h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, var(--amber-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .studio-banner p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+  .religion-filter-bar {
+    display: flex;
+    gap: 0.45rem;
+    overflow-x: auto;
+    padding-bottom: 0.3rem;
+  }
+  .rel-tab {
+    background: rgba(11, 7, 18, 0.5);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .rel-tab:hover, .rel-tab.active {
+    background: var(--violet-primary);
+    color: #fff;
+    border-color: var(--violet-bright);
+    box-shadow: 0 2px 8px var(--violet-glow);
+  }
+
+  .festival-pills {
+    display: flex;
+    gap: 0.55rem;
+    overflow-x: auto;
+    padding: 0.2rem 0 0.5rem 0;
+  }
+  .fest-pill {
+    background: var(--surface-light);
+    border: 1px solid var(--border-accent);
+    color: var(--text-main);
+    padding: 0.55rem 1rem;
+    border-radius: 24px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .fest-pill:hover, .fest-pill.selected {
+    background: linear-gradient(135deg, var(--violet-primary), var(--amber-primary));
+    color: #ffffff;
+    border-color: var(--amber-light);
+    box-shadow: 0 4px 14px var(--violet-glow);
+    transform: translateY(-1px);
+  }
+
+  .studio-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 900px) { .studio-grid { grid-template-columns: 1fr; } }
+
+  .editor-card {
+    background: var(--surface);
+    border: 1px solid var(--border-accent);
+    border-radius: 20px;
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  }
+  .editor-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 800;
+    color: var(--amber-light);
+    font-size: 1.1rem;
+  }
+  .media-preview-container {
+    width: 100%;
+    height: 270px;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+  .media-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .caption-textarea {
+    width: 100%;
+    height: 150px;
+    background: var(--bg);
+    border: 1px solid var(--border-accent);
+    border-radius: 12px;
+    padding: 0.9rem;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+  }
+  .caption-textarea:focus { border-color: var(--amber-primary); box-shadow: 0 0 12px var(--amber-glow); }
+
+  .hashtags-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border-accent);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    color: var(--violet-bright);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    outline: none;
+  }
+
+  .action-row {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+  .btn-action {
+    flex: 1;
+    background: var(--surface-light);
+    border: 1px solid var(--border-accent);
+    color: var(--text-main);
+    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+  }
+  .btn-action:hover {
+    background: var(--border-accent);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .btn-action.primary {
+    background: linear-gradient(135deg, var(--amber-primary), var(--amber-light));
+    color: #000;
+    border: none;
+    box-shadow: 0 4px 14px var(--amber-glow);
+  }
+  .btn-action.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--amber-glow);
+  }
+
+  .saved-posts-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .post-card:hover {
+    border-color: var(--amber-primary);
+    background: var(--surface-card);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  }
+  .post-thumb {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #000;
+    flex-shrink: 0;
+    border: 1px solid var(--border-accent);
+  }
+  .post-info { flex: 1; overflow: hidden; }
+  .post-info h4 { margin: 0 0 0.25rem 0; font-size: 0.95rem; color: var(--amber-light); font-weight: 700; }
+  .post-info p { margin: 0; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .toast {
+    position: fixed;
+    bottom: 2.2rem;
+    right: 2.2rem;
+    background: var(--surface-card);
+    border: 1px solid var(--green-accent);
+    color: #fff;
+    padding: 0.85rem 1.3rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="brand-logo">G</div>
+    <div class="brand-info">
+      <h1>Gullygram CMO</h1>
+      <p>AI Growth Marketing & Indian Festival Studio</p>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-btn active" id="tab-chat" onclick="switchTab('chat')">
+      <span class="material-symbols-outlined" style="font-size:1.15rem;">chat</span>
+      Growth & Viral Chat
+    </button>
+    <button class="nav-btn" id="tab-festivals" onclick="switchTab('festivals')">
+      <span class="material-symbols-outlined" style="font-size:1.15rem;">celebration</span>
+      Indian Festival Studio
+    </button>
+  </div>
+
+  <div class="status-badge">
+    <div class="status-dot"></div>
+    Agent Platform Active
+  </div>
+</header>
+
+<div id="main-container">
+  <!-- View 1: Chat View -->
+  <div id="view-chat" class="view-panel">
+    <div id="log">
+      <div class="msg agent">
+        <div class="sender-label">Gullygram CMO</div>
+        <div class="bubble">
+          Namaste! I am your AI Chief Marketing Officer & Creative Director for Gullygram.
+          I specialize in CAC & ROAS calculation, growth strategy, viral sports campaigns for Bengaluru societies, and multi-religion Indian festival wishing graphics!
+        </div>
+      </div>
+    </div>
+
+    <div class="suggestions-container">
+      <div class="suggestions-title">⚡ Quick Prompts</div>
+      <div class="suggestions-row">
+        <div class="prompt-chip" onclick="sendPrompt('Generate viral social media post for Gullygram badminton tournament in HSR Layout society')">
+          <div class="chip-title"><span class="material-symbols-outlined" style="font-size:1rem;">sports_badminton</span> Viral Sports Post</div>
+          <div class="chip-desc">Badminton in HSR Layout society</div>
+        </div>
+        <div class="prompt-chip" onclick="sendPrompt('Generate a celebration wishing post for Diwali festival with Gullygram wishes and festive graphic')">
+          <div class="chip-title"><span class="material-symbols-outlined" style="font-size:1rem;">celebration</span> Diwali Wish Post</div>
+          <div class="chip-desc">Festive wish banner + caption</div>
+        </div>
+        <div class="prompt-chip" onclick="sendPrompt('Look up marketing channels from Firestore and calculate ROI for 50000 INR budget on Society Whatsapp Groups')">
+          <div class="chip-title"><span class="material-symbols-outlined" style="font-size:1rem;">analytics</span> ROI Calculation</div>
+          <div class="chip-desc">Firestore lookup & ROI metrics</div>
+        </div>
+      </div>
+    </div>
+
+    <form id="form">
+      <div class="input-wrapper">
+        <input id="input" type="text" placeholder="Ask CAC calculation, viral post for Badminton, or Diwali festival wish..." autocomplete="off" />
+      </div>
+      <button type="submit" class="send-btn">
+        <span class="material-symbols-outlined" style="font-size:1.15rem;">send</span>
+        Send
+      </button>
+    </form>
+  </div>
+
+  <!-- View 2: Indian Festival Posts Studio -->
+  <div id="view-festivals" class="view-panel custom-scroll festival-studio hidden">
+    <div class="studio-banner">
+      <h2>🎉 Multi-Religion Indian Celebration Calendar & Festival Studio</h2>
+      <p>Track upcoming celebrations across all Indian faiths (Hindu, Muslim, Christian, Sikh, Jain, Buddhist, Zoroastrian). Generate festive graphics with Gullygram wishes, edit captions live, and download media assets for Instagram & WhatsApp stories!</p>
+      
+      <div class="religion-filter-bar">
+        <button class="rel-tab active" onclick="filterReligion('ALL')">✨ ALL RELIGIONS</button>
+        <button class="rel-tab" onclick="filterReligion('Hindu')">🪔 HINDU</button>
+        <button class="rel-tab" onclick="filterReligion('Islam')">🌙 ISLAM</button>
+        <button class="rel-tab" onclick="filterReligion('Christianity')">✝️ CHRISTIAN</button>
+        <button class="rel-tab" onclick="filterReligion('Sikhism')">ੴ SIKH</button>
+        <button class="rel-tab" onclick="filterReligion('Jainism')">🪷 JAIN</button>
+        <button class="rel-tab" onclick="filterReligion('Buddhism')">☸️ BUDDHIST</button>
+        <button class="rel-tab" onclick="filterReligion('Regional')">🌴 REGIONAL</button>
+      </div>
+
+      <div class="festival-pills" id="festival-pills">
+        <!-- Dynamically rendered pills -->
+      </div>
+    </div>
+
+    <div class="studio-grid">
+      <!-- Active Post Editor -->
+      <div class="editor-card">
+        <div class="editor-title">
+          <span id="editor-fest-name">🪔 Diwali Festival Wish Post</span>
+          <button class="btn-action primary" style="flex:none; padding: 0.45rem 0.9rem;" onclick="generateSelectedFestivalPost()">
+            <span class="material-symbols-outlined" style="font-size:1.05rem;">auto_awesome</span> Generate Fresh Post
+          </button>
+        </div>
+
+        <div class="media-preview-container">
+          <img id="editor-img" src="https://storage.googleapis.com/gullygram-cmo-media-qwiklabs-gcp-03-a4d830cde502/ad_creative_bfa7a61b.jpg" alt="Festival Graphic" />
+        </div>
+
+        <div>
+          <label style="font-size:0.8rem; color:var(--amber-light); font-weight:700; display:block; margin-bottom:0.35rem;">CAPTION & GULLYGRAM WISHES (EDITABLE)</label>
+          <textarea id="editor-caption" class="caption-textarea">🪔 Gullygram wishes you and your apartment society family a luminous, prosperous & joyous Diwali! 🪔
+
+May your clubhouse light up with victory, laughter, and unbreakable community spirit. From exciting society tournaments to bright festive sweets, let's celebrate togetherness!</textarea>
+        </div>
+
+        <div>
+          <label style="font-size:0.8rem; color:var(--amber-light); font-weight:700; display:block; margin-bottom:0.35rem;">HASHTAGS</label>
+          <input id="editor-hashtags" class="hashtags-input" value="#GullygramWishes #HappyDiwali #SocietyCelebrations #FestivalOfLights #BengaluruSocieties" />
+        </div>
+
+        <div class="action-row">
+          <button class="btn-action" onclick="copyCaptionToClipboard()">
+            <span class="material-symbols-outlined" style="font-size:1.05rem;">content_copy</span> Copy Caption
+          </button>
+          <button class="btn-action" onclick="downloadMediaAsset()">
+            <span class="material-symbols-outlined" style="font-size:1.05rem;">download</span> Download Graphic
+          </button>
+          <button class="btn-action primary" onclick="saveEditedPost()">
+            <span class="material-symbols-outlined" style="font-size:1.05rem;">save</span> Save Changes
+          </button>
+        </div>
+      </div>
+
+      <!-- Saved Festival Posts Gallery -->
+      <div class="saved-posts-panel">
+        <h3 style="margin:0 0 0.3rem 0; font-size:1.1rem; color:var(--amber-light); font-weight:800;">Saved Festival Posts Library</h3>
+        <div id="saved-posts-list" style="display:flex; flex-direction:column; gap:0.8rem;">
+          <!-- Dynamically populated saved posts -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const log = document.getElementById("log");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+
+let activeFestival = "Diwali (Festival of Lights)";
+let currentMediaUrl = "https://storage.googleapis.com/gullygram-cmo-media-qwiklabs-gcp-03-a4d830cde502/ad_creative_bfa7a61b.jpg";
+let allFestivalsList = [];
+let savedPostsData = [];
+
+function switchTab(tab) {
+  document.getElementById("tab-chat").classList.toggle("active", tab === "chat");
+  document.getElementById("tab-festivals").classList.toggle("active", tab === "festivals");
+  
+  document.getElementById("view-chat").classList.toggle("hidden", tab !== "chat");
+  document.getElementById("view-festivals").classList.toggle("hidden", tab !== "festivals");
+
+  if (tab === "festivals") {
+    loadFestivalsData();
+  }
+}
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function showToast(msg) {
+  const t = el("div", "toast");
+  t.innerHTML = `<span class="material-symbols-outlined" style="color:var(--green-accent)">check_circle</span> ${msg}`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
+function bubble(who) {
+  const m = el("div", "msg " + who);
+  const label = el("div", "sender-label", who === "user" ? "You" : "Gullygram CMO");
+  const b = el("div", "bubble");
+  m.appendChild(label);
+  m.appendChild(b);
+  log.appendChild(m);
+  log.scrollTop = log.scrollHeight;
+  return b;
+}
+
+function sendPrompt(text) {
+  switchTab('chat');
+  input.value = text;
+  form.requestSubmit();
+}
+
+/* --- Festival Studio Logic --- */
+async function loadFestivalsData() {
+  try {
+    const res = await fetch("/api/festivals");
+    const data = await res.json();
+    allFestivalsList = data.festivals || [];
+    renderFestivalPills(allFestivalsList);
+    await loadSavedPosts();
+  } catch (e) {
+    console.error("Error loading festivals:", e);
+  }
+}
+
+function filterReligion(rel) {
+  document.querySelectorAll(".rel-tab").forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+  if (rel === "ALL") {
+    renderFestivalPills(allFestivalsList);
+  } else {
+    const filtered = allFestivalsList.filter(f => f.religion.toLowerCase().includes(rel.toLowerCase()));
+    renderFestivalPills(filtered);
+  }
+}
+
+function renderFestivalPills(list) {
+  const container = document.getElementById("festival-pills");
+  container.innerHTML = "";
+  list.forEach(f => {
+    const pill = el("button", "fest-pill" + (f.name === activeFestival ? " selected" : ""));
+    pill.innerHTML = `<span class="material-symbols-outlined" style="font-size:1rem;">celebration</span> ${f.name}`;
+    pill.onclick = () => {
+      document.querySelectorAll(".fest-pill").forEach(p => p.classList.remove("selected"));
+      pill.classList.add("selected");
+      activeFestival = f.name;
+      document.getElementById("editor-fest-name").textContent = f.name;
+    };
+    container.appendChild(pill);
+  });
+}
+
+async function loadSavedPosts() {
+  try {
+    const res = await fetch("/api/festivals/posts");
+    const data = await res.json();
+    savedPostsData = data.posts || [];
+    const container = document.getElementById("saved-posts-list");
+    container.innerHTML = "";
+
+    savedPostsData.forEach(post => {
+      const card = el("div", "post-card");
+      card.onclick = () => loadPostIntoEditor(post);
+
+      const img = el("img", "post-thumb");
+      img.src = post.media_url || "https://storage.googleapis.com/gullygram-cmo-media-qwiklabs-gcp-03-a4d830cde502/ad_creative_bfa7a61b.jpg";
+
+      const info = el("div", "post-info");
+      info.appendChild(el("h4", null, post.festival));
+      info.appendChild(el("p", null, post.caption));
+
+      card.appendChild(img);
+      card.appendChild(info);
+      container.appendChild(card);
+    });
+  } catch (e) {
+    console.error("Error loading saved posts:", e);
+  }
+}
+
+function loadPostIntoEditor(post) {
+  document.getElementById("editor-fest-name").textContent = post.festival;
+  document.getElementById("editor-caption").value = post.caption;
+  document.getElementById("editor-hashtags").value = post.hashtags || "";
+  document.getElementById("editor-img").src = post.media_url;
+  currentMediaUrl = post.media_url;
+  activeFestival = post.festival;
+}
+
+async function generateSelectedFestivalPost() {
+  switchTab("chat");
+  const promptText = `Generate a warm celebration post with Gullygram wishes and festive graphic for the festival: ${activeFestival}`;
+  sendPrompt(promptText);
+}
+
+function copyCaptionToClipboard() {
+  const cap = document.getElementById("editor-caption").value;
+  const hash = document.getElementById("editor-hashtags").value;
+  const fullText = `${cap}\n\n${hash}`;
+  navigator.clipboard.writeText(fullText);
+  showToast("Caption & wishes copied to clipboard!");
+}
+
+function downloadMediaAsset() {
+  const src = document.getElementById("editor-img").src;
+  const a = document.createElement("a");
+  a.href = src;
+  a.download = `gullygram_festival_creative_${Date.now()}.jpg`;
+  a.target = "_blank";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  showToast("Downloading festive media graphic...");
+}
+
+async function saveEditedPost() {
+  const fest = document.getElementById("editor-fest-name").textContent;
+  const caption = document.getElementById("editor-caption").value;
+  const hashtags = document.getElementById("editor-hashtags").value;
+  const media_url = document.getElementById("editor-img").src;
+
+  const payload = { festival: fest, caption, hashtags, media_url };
+  const res = await fetch("/api/festivals/save", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (res.ok) {
+    showToast("Festival post saved to library!");
+    await loadSavedPosts();
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * A2UI mini-renderer (v0.8 Basic Catalog subset).
+ * -------------------------------------------------------------------------- */
+function boundStr(v) {
+  if (v == null) return "";
+  if (typeof v === "string") return v;
+  if (typeof v.literalString === "string") return v.literalString;
+  return "";
+}
+
+function childIds(props) {
+  const ids = [];
+  if (props && typeof props.child === "string") ids.push(props.child);
+  const ch = props && props.children;
+  if (ch && Array.isArray(ch.explicitList)) for (const c of ch.explicitList) if (typeof c === "string") ids.push(c);
+  return ids;
+}
+
+function iconName(n) { return String(n || "").replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/\s+/g, "_").toLowerCase(); }
+
+function buildNode(id, comps, seen) {
+  if (!id || seen.has(id)) return null;
+  seen.add(id);
+  const spec = comps[id];
+  if (!spec || typeof spec !== "object") return null;
+  const type = Object.keys(spec)[0];
+  const props = spec[type] || {};
+  const kids = () => childIds(props).map(cid => buildNode(cid, comps, seen)).filter(Boolean);
+
+  switch (type) {
+    case "Card": {
+      const d = el("div", "a2card"); kids().forEach(n => d.appendChild(n)); return d;
+    }
+    case "Column":
+    case "List": {
+      const horizontal = type === "List" && props.direction === "horizontal";
+      const d = el("div", horizontal ? "a2row" : "a2col"); kids().forEach(n => d.appendChild(n)); return d;
+    }
+    case "Row": {
+      const d = el("div", "a2row" + (props.distribution === "spaceBetween" ? " between" : ""));
+      kids().forEach(n => d.appendChild(n)); return d;
+    }
+    case "Text": {
+      const t = el("div", "a2text");
+      const hint = String(props.usageHint || "body").toLowerCase();
+      if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(hint)) t.classList.add("a2-" + hint);
+      else if (hint === "caption") t.classList.add("a2-caption");
+      t.textContent = boundStr(props.text);
+      return t;
+    }
+    case "Divider":
+      return el("hr", "a2divider");
+    case "Image": {
+      const src = boundStr(props.url || props.src);
+      if (!/^https?:\/\//i.test(src)) return null;
+      const img = el("img", "a2img"); img.src = src; img.alt = boundStr(props.alt) || ""; return img;
+    }
+    case "Icon": {
+      const s = el("span", "material-symbols-outlined"); s.textContent = iconName(boundStr(props.name) || props.name); return s;
+    }
+    default:
+      return null;
+  }
+}
+
+function renderSurface(messages, container) {
+  const comps = {};
+  const roots = [];
+  for (const m of messages) {
+    if (m.beginRendering && typeof m.beginRendering.root === "string") roots.push(m.beginRendering.root);
+    const su = m.surfaceUpdate;
+    if (su && Array.isArray(su.components)) for (const c of su.components) if (c && c.id && c.component) comps[c.id] = c.component;
+  }
+  let rootIds = roots.filter(r => comps[r]);
+  if (rootIds.length === 0) {
+    const referenced = new Set();
+    for (const id in comps) { const spec = comps[id]; childIds(spec[Object.keys(spec)[0]] || {}).forEach(c => referenced.add(c)); }
+    rootIds = Object.keys(comps).filter(id => !referenced.has(id));
+  }
+  let drew = false;
+  for (const rid of rootIds) { const node = buildNode(rid, comps, new Set()); if (node) { container.appendChild(node); drew = true; } }
+  return drew;
+}
+
+function flattenText(messages) {
+  const out = [];
+  for (const m of messages) {
+    const su = m.surfaceUpdate;
+    if (su && Array.isArray(su.components)) for (const c of su.components) if (c && c.component && c.component.Text) out.push(boundStr(c.component.Text.text));
+  }
+  return out.join("\n").trim();
+}
+
+function renderReply(b, parts) {
+  b.textContent = "";
+  const texts = parts.filter(p => p && (p.kind === "text" || (!p.kind && p.text))).map(p => p.text || "");
+  const a2ui = parts.filter(p => p && p.kind === "a2ui" && p.data).map(p => p.data);
+
+  const textStr = texts.join("\n").trim();
+  if (textStr) b.appendChild(el("div", null, textStr));
+
+  if (a2ui.length) {
+    b.classList.add("rich");
+    if (!renderSurface(a2ui, b)) b.appendChild(el("div", null, flattenText(a2ui) || "(no card content)"));
+  }
+  if (!b.childNodes.length) b.textContent = "(no response)";
+  log.scrollTop = log.scrollHeight;
+}
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const text = input.value.trim();
+  if (!text) return;
+  bubble("user").textContent = text;
+  input.value = "";
+  const b = bubble("agent"); b.textContent = "… Generating festive post & creative graphics...";
+  try {
+    const res = await fetch("/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: text }) });
+    const raw = await res.text();
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { throw new Error(`Server returned non-JSON (HTTP ${res.status}). ${raw.slice(0, 300)}`); }
+    renderReply(b, data.parts || []);
+  } catch (e) {
+    b.textContent = "Error: " + e.message;
+  }
+});
+</script>
+</body>
+</html>
